@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <time.h>
-#include <net-snmp/net-snmp-includes.h>
 
 
 int numprinted = 0;
@@ -33,10 +32,6 @@ snmp_get_and_print(netsnmp_session * ss, oid * theoid, size_t theoid_len)
         snmp_free_pdu(response);
     }
 }
-
-class snmpbulkwalk {
-
-};
 
 int main (){
 
@@ -201,14 +196,8 @@ int main (){
             snmp_free_pdu(response);
     }
 
-    if (numprinted == 0 && status == STAT_SUCCESS) {
-        snmp_get_and_print(ss, root, rootlen);
-    }
-
     std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
-
     std::chrono::duration<double> sec = std::chrono::system_clock::now() - start;
-
     std::cout << "elapsed time : " << sec.count() << " seconds" << std::endl;
 
     snmp_close(ss);
